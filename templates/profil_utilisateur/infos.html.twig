@@ -1,0 +1,188 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+
+<!--HEROSHOT PROFIL-->
+<div id="heroshot_profil" class="col"></div>
+<div class="container">
+
+	<!--PHOTO PROFIL + INFOS PERSO-->
+
+	<section id="infos_perso">
+		<img src="{{asset('img/photos/Photo_profil.png')}}" alt="photo de profil">
+		<h1 id="h1profil">{{userInfos.prenom}}</h1>
+		{% if app.user.pays is empty %}
+		Entrer votre pays et votre ville ci-dessous
+		{% else %}
+		<p>{{userInfos.ville}}, {{userInfos.pays}}</p>
+		{% endif %}
+		<p>{{userInfos.getAge}} ans</p>
+	</section>
+
+
+	<!-- ENTETE REACAPITULATIF DU VOYAGE -->
+	<section class="historique">
+		<div class="container">
+			<div class="row mb-4">
+				<div class="col-12">
+					<h2 id="profiler">Mon historique</h2>
+					<div class="row">
+						<div class="col-lg-4 col-sm-12">
+							<img class="img-fluid vignette" id="produit_vertical"
+								src="{{asset('img/photos/panorama-mer.jpg') }}" alt="recapitulatif-voyage">
+						</div>
+
+						<div class="col-lg-6 col-sm-12">
+
+							<ul id="caracteristiques1">
+								<!--caractéristique bloc 1-->
+								<li><img class="img-fluid" src="{{asset('img/pictos/Picto39_DESKTOP.png') }}"
+										alt="picto bande de film"><strong>Sur les traces d'Almodóvar</strong>
+								</li>
+								<li><img class="img-fluid" src="{{asset('img/pictos/Picto40_DESKTOP.png') }}"
+										alt="picto localisation">Réservation N° 145687</li>
+								<li><img class="img-fluid" src="{{asset('img/pictos/Picto41_DESKTOP.png') }}"
+										alt="picto valise">
+									Groupe
+									<b id="groupe">BG success 750 €</b>
+								</li>
+								<li><img class="img-fluid" src="{{asset('img/pictos/Picto42_DESKTOP.png') }}"
+										alt="picto valise">Du 13
+									mai au 22 mai
+									2021
+								</li>
+								<li>
+									<p id="position" class="mb-4">
+									<img class="img-fluid"
+											src="{{ asset('img/pictos/Picto43_DESKTOP.png') }}"
+											alt="picto position">Madrid,
+										Espagne</p>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="row">
+
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			{{ include('profil_utilisateur/edit.html.twig') }}
+		</div>
+
+		
+		<div class="col-sm-12 col-md-12 col-lg-6 ">
+			<div class="mt-5">
+				<h2 id="profiler">Mes genres favoris</h2>
+				<div id="flex-genres">
+					<!--conteneur flex checkbox-->
+					<div class="row">
+						<div class="genre col-4">
+							<!--item 1-->
+							<div>
+								<input type="checkbox" name="drame" value="drame">
+								<label>Drame</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="horreur" value="horreur">
+								<label>Horreur</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="policier" value="policier">
+								<label>Policier</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="thriller" value="thriller">
+								<label>Thriller</label>
+							</div>
+	
+						</div>
+	
+						<div class="genre col-4">
+							<!--item 2-->
+							<div>
+								<input type="checkbox" name="romance" value="romance">
+								<label>Romance</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="comedie" value="comedie">
+								<label>Comédie</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="western" value="western">
+								<label>Western</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="serieTV" value="serieTV">
+								<label>Séries TV</label>
+							</div>
+	
+						</div>
+	
+						<div class="genre col-4">
+							<!--item 3-->
+							<div>
+								<input type="checkbox" name="biopic" value="biopic">
+								<label>Biopic</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="action" value="action">
+								<label>Action</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="aventure" value="aventure">
+								<label>Aventure</label>
+							</div>
+	
+							<div>
+								<input type="checkbox" name="fantasy" value="fantasy">
+								<label>Fantasy</label>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="groupes mt-5">
+				<h2 id="profiler">Mes groupes</h2>
+				<p>Groupe BG Sucess<span class="ml-5">Réservation en cours N° 145687</span>
+				</p>
+				<div>
+					<img class="ml-4" src="{{asset ('img/pictos/Picto32_Groupe_DESKTOP.png') }}" alt="photo participant1">
+					<img class="ml-4" src="{{asset ('img/pictos/Picto33_Groupe_DESKTOP.png') }}" alt="photo participant2">
+					<img class="ml-4" src="{{asset ('img/pictos/Picto34_Groupe_DESKTOP.png') }}" alt="photo participant3">
+					<img class="ml-4" src="{{asset ('img/pictos/Picto35_Groupe_DESKTOP.png') }}" alt="photo participant4">
+					<img class="ml-4" src="{{asset ('img/pictos/check_profil.png') }}" alt="icone check">
+				</div>
+				<button class="btn-modifier mt-3">Modifier</button>
+				<button class="btn-valider">Relancer le groupe</button>
+
+				<div class="text-center">
+					<a href="#"><img class="mt-5 mr-5" src="{{asset ('img/pictos/Group_145.png') }}" alt="Bouton ajouter un groupe"></a>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+
+
+</div>
+</div>
+
+</section>
+</div>{% endblock %}

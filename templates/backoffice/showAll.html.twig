@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+	<div id="head" class="text-center">
+		<h2>Back Office</h2>
+
+		{% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+		<a href="{{ path('backoffice_create') }}"><i class="fas fa-plus"></i> Créer une experience</a>
+
+	</div>
+	<br>
+	<br>
+	<br>
+
+			<table class="table table-striped table-hover text-center">
+				<thead class="bg-light text-dark">
+					<th>#</th>
+					<th>Théme</th>
+					<th>Genre</th>
+					<th>Titre Experience</th>
+					<th>Destination</th>
+					<th>Voir/ Modifier</th>
+					<th>Supprimer</th>
+				</thead>
+				<tbody>
+
+					{% for contenu in allExperience %}
+						<tr>
+							<td>{{ contenu.id }}</td>
+							<td>{{ contenu.theme }}</td>
+							<td>{{ contenu.genreCine }}</td>
+							<td>{{ contenu.titreExperience }}</td>
+							<td>{{ contenu.paysDestination }}</td>
+
+							<td>
+								<a href="{{path('backoffice_edit',{id:contenu.id})}}" class="btn btn-warning">
+									<i class="far fa-edit"></i>
+								</a>
+							</td>
+							<td>
+							
+								<a href="{{ path('backoffice_delete', {id: contenu.id}) }}" class="btn btn-danger" onclick="return confirm('Voulez vous vraiment supprimer ?')">
+									<i class="far fa-trash-alt"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+{% endblock %}

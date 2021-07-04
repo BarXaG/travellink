@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {# Si la route est "experience_edit on affiche les images #}
+	{% if experience.imagesExperience is empty %}
+		L'experience <b>{{ experience.titreExperience }} </b> n'a pas d'image
+
+	{% else %}
+	{% if app.request.attributes.get('_route') == 'backoffice_edit' %}
+        <h2>Images</h2>
+        {% for image in experience.imagesExperience %}
+            <div>
+                <img src="{{ asset('/img/'~image.urlImage) }}" alt="" width="150">
+                
+                <a href="{{ path('backoffice_image_delete', {id: image.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer l\'image')">Supprimer</a>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+    {% endif %}
+{{ form_end(form) }}

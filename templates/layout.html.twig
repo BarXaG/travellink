@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="center">
+				<a href="{{ path('index') }}"><img src="{{ asset("img/logo/Logo_Creme.png") }}" alt="logo" class="logo"></a>
+			</div>
+
+			<div class="flex-nav">
+				<nav class="navbar navbar-expand-lg navbar-light nav-basis">
+					<div
+						class="container-fluid">
+						<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto mb-10 mb-lg-0 between">
+								<li class="nav-item">
+									<a class="nav-link active" href="{{ path('travellink_catalogue') }}">Catalogue</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" href="#">Blog</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" href="{{ path('contact') }}">Contact</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" href="{{ path('tunnel') }}">Panier</a>
+								</li>
+							</ul>
+						</div>
+
+
+						<div class="profile">
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+										role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<img class="img-fluid" src="{{asset('../img/pictos/Picto20_DESKTOP_New.png') }}" width="100" height="100" class="rounded-circle">
+									</a>
+									{% if is_granted('ROLE_ADMIN') %}
+
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<span class="dropdown-item-text">
+												Bonjour <b>{{app.user.prenom}}</b>
+											</span>
+											<a class="dropdown-item" href="{{ path('backoffice_showall') }}">Backoffice</a>
+											<a class="dropdown-item" href="{{ path('user_edit', {id: app.user.id}) }}">Modifiez votre profil</a>
+											<a class="dropdown-item bg-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
+										</div>
+									{% elseif is_granted('ROLE_USER') %}
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<span class="dropdown-item-text">
+												Bonjour <b>{{app.user.prenom}}</b>
+											</span>
+											<a class="dropdown-item" href="{{ path('user_edit', {id: app.user.id}) }}">Modifiez votre profil</a>
+											<a class="dropdown-item bg-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
+										</div>
+									{% else %}
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<a class="dropdown-item" href="{{ path('app_register') }}">Créer un compte</a>
+											<a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
+										{% endif %}
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			{% block content %}
+				{# c'est là que viendra s'insérer le contenu affichable propre à chaque template de notre projet #}
+			{% endblock %}
+		</main>
+
+		<footer id="footer">
+			<div class="container footer-ordi">
+				<div div class="footer1">
+					<h5 class="footer1-2">On reste en contact ?</h5>
+					<form action="" class=" d-flex justify-content-center align-items-center ">
+						<input type="text" placeholder="Email" class="form-footer">
+						<a href="#"><img src="{{asset("../img/pictos/Picto12_DESKTOP.png")}}" alt="Rechercher" class="form-footer2"></a>
+					</form>
+				</div>
+				<div class="row footer2">
+					<aside class=" col-lg-4 footer2-1">
+						<h6 class="footer2-1-1">Où nous trouver ?</h6>
+						<h6 class="footer2-1-2">Travellink</h6>
+						<p id="adresse">36 quai des orfèvres<br>75001 Paris</p>
+						<p>Tél. : 01.00.00.00.00</p>
+					</aside>
+					<div class="vert"></div>
+					<aside class=" col-lg-4 footer2-2">
+						<h6>Informations légales</h6>
+						<p>Mentions légales</p>
+						<p>Conditions générales de vente</p>
+						<p>Conseils aux voyageurs</p>
+					</aside>
+					<div class="vert"></div>
+					<aside class=" col-lg-3 footer2-3">
+						<h6>Contact</h6>
+						<p>Suivez-nous</p>
+						<ul class="d-flex">
+							<li>
+								<a href="#"><img src="{{asset("../img/pictos/Picto49_DESKTOP.png")}}" alt="facebook"></a>
+							</li>
+							<li class="mx-4">
+								<a href="#"><img src="{{asset("../img/pictos/Picto23_DESKTOP.png")}}" alt="twitter"></a>
+							</li>
+							<li>
+								<a href="#"><img src="{{asset("../img/pictos/Picto24_DESKTOP.png") }}" alt="instagram"></a>
+							</li>
+						</ul>
+					</aside>
+				</div>
+			</div>
+			<div class="footer container footer-tel">
+				<h5 class="col-lg-12">Restez connecté à toutes nos actualités :</h5>
+				<div class="footer-tel-1">
+					<form action="email" class=" d-flex justify-content-center align-items-center ">
+						<input type="text" placeholder="email" class="form-footer-tel col-lg-4">
+					</form>
+					<ul class="d-flex col-lg-4 footer-tel-1-2">
+						<li>
+							<a href="#"><img src="img/pictos/Picto44_DESKTOP.png" alt="facebook"></a>
+						</li>
+						<li class="mx-4">
+							<a href="#"><img src="../img/pictos/Picto23_DESKTOP.png" alt="twitter"></a>
+						</li>
+						<li>
+							<a href="#"><img src="../img/pictos/Picto24_DESKTOP.png" alt="instagram"></a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-tel-2">
+					<aside class=" col-lg-4 footer2-2">
+						<h6>Informations légales</h6>
+						<p>Mentions légales</p>
+						<p>Conditions générales de vente</p>
+						<p>Conseils aux voyageurs</p>
+					</aside>
+					<aside class=" col-lg-4 footer-tel-2-1">
+						<h6>Contact</h6>
+						<h6 class="footer-tel-2-2">Travellink</h6>
+						<p id="adresse">36 quai des orfèvres<br>75001 Paris</p>
+						<p>Tél. : 01.00.00.00.00</p>
+					</aside>
+				</div>
+			</div>
+			<div class="footer row flex-column justify-content-center align-items-center mt-4 bas-footer">
+				<p class="bottom10px">2021 © Travellink - by BG-Success</p>
+			</div>
+		</footer>
+	{% endblock %}

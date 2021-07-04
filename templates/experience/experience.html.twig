@@ -1,0 +1,462 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div><img id="image_banniere" src="{% for imageExperience in banniereExperience %} {{ imageExperience.urlImage }} {% endfor %}" alt=""></div>
+
+	<section id="recap_desk">
+		<div class="container">
+			<img
+			id="produit_vertical" src="{% for imageExperience in imageProfilExperience %} {{ imageExperience.urlImage }} {% endfor %}" alt="">
+			<!--mettre l'image en position absolute-->
+			<h1>{{ experience.theme }}</h1>
+			<!--margin sur h1 + padding sur le span-->
+
+			<div
+				class="flex">
+				<!--conteneur flex (display flex)-->
+
+				<div
+					id="caracteristiques">
+					<!--items flexs-->
+					<ul>
+						<!--caractéristique bloc 1-->
+						<li><img src="../img/pictos/Picto39_DESKTOP.png" alt="picto bande de film">{{ experience.genreCine.genre }}</li>
+						{% if experience.villeDestination == '' %}
+							<li><img src="../img/pictos/Picto43_DESKTOP.png" alt="picto localisation">{{ experience.paysDestination }}</li>
+						{% else %}
+							<li><img src="../img/pictos/Picto43_DESKTOP.png" alt="picto localisation">{{ experience.villeDestination }},
+								{{ experience.paysDestination }}</li>
+						{% endif %}
+						<li><img src="../img/pictos/Picto42_DESKTOP.png" alt="picto valise">Du
+							{{ experience.dateDepart | date("d/m") }}
+							au
+							{{ experience.dateRetour | date("d/m/Y") }}</li>
+						<li><img src="../img/pictos/Picto41_DESKTOP.png" alt="picto valise">Participants</li>
+					</ul>
+					<div id="choix">
+						<button class="quantite radius-left">-</button>
+						<span id="nb_quantite">4</span>
+						<button class="quantite radius-right">+</button>
+
+						<select name="nombre_personnes" id="nombre_personnes">
+							{% for formule in formules %}
+								<option value="nombre_personnes">{{ formule.typeFormule }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+
+				<div>
+					<p id="prix">
+						<b>
+							{{ tarifBasic[0].tarif }}
+						</b>
+						€ TTC</p>
+					<p class="infos">Formule Court-métrage</p>
+					<p class="infos">4 voyageurs</p>
+
+					<div class="flex-bouton">
+						<a class="btn-groupe" href="">Créer un groupe</a>
+						<a class="btn-panier" href="">Ajouter au panier</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+
+	<section id="recap_mobile">
+		<img src="" alt="">
+		<h1></h1>
+
+		<div>
+			<!--conteneur flex-->
+			<ul>
+				<!--caractéristique bloc 1-->
+				<!--item version mobile--><li>
+
+			</li>
+			</ul>
+				<p>
+			750€ TTC
+		</p>
+		</div>
+			<a href=""> Créer un groupe</a>
+		<a href="">Ajouter au panier</a>
+	</section>
+
+	<article>
+		<div class="container">
+			<h2 class="muse titre-muse">{{ experience.titreExperience }}</h2>
+			<p class="muse">
+				{{ experience.descriptionExperience }}
+			</p>
+		</div>
+	</article>
+
+	<div>
+		<div
+			class="container" id="photos_muse">
+			<!--conteneur flex-->
+			{% for imageExperience in vignettesExperience %}
+				<figure><img id="photo_tour1" src="{{ imageExperience.urlImage }}" alt="{{ imageExperience.urlImage }}"></figure>
+			{% endfor %}
+		</div>
+	</div>
+
+	<section id="formules">
+		<div class="container">
+			<div>
+				<h3>Formules</h3>
+				<div
+					id="flex-formules">
+					<!--conteneur flex-->
+					<article
+						class="card_formule">
+						<!--items + conteneur flex-->
+						<div>
+							<!--item-->
+							<img src="../img/pictos/picto_DESKTOP1bis.png" alt="Pictogramme avion papier">
+							<h4>Formule<br><span>Court-métrage</span>
+							</h4>
+							<p class="prix">
+								<b>
+									{{ tarifBasic[0].tarif }}
+								</b>€ TTC</p>
+							<div>
+								<p class="etape">
+									<b>Étape 1</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour1[0].villeEtape }},
+										{{ etapeJour1[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesBasicJour1 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 2</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour2[0].villeEtape }},
+										{{ etapeJour2[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesBasicJour2 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 3</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour3[0].villeEtape }},
+										{{ etapeJour3[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesBasicJour3 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+						</div>
+
+						<button class="btn-choisir" id="choisir1">Découvrir</button>
+
+					</article>
+
+					<article
+						class="card_formule">
+						<!--items + conteneur flex-->
+						<div>
+							<!--item-->
+							<img src="../img/pictos/picto_DESKTOP1bis.png" alt="Pictogramme avion papier">
+							<h4>Formule<br><span>Long-métrage</span>
+							</h4>
+							<p class="prix">
+								<b>
+									{{ tarifMedium[0].tarif }}
+								</b>€ TTC</p>
+							<div>
+								<p class="etape">
+									<b>Étape 1</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour1[0].villeEtape }},
+										{{ etapeJour1[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesMediumJour1 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 2</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour2[0].villeEtape }},
+										{{ etapeJour2[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesMediumJour2 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 3</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour3[0].villeEtape }},
+										{{ etapeJour3[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesMediumJour3 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+						</div>
+
+						<button class="btn-choisir" id="choisir2">Découvrir</button>
+
+					</article>
+
+					<article
+						class="card_formule">
+						<!--items + conteneur flex-->
+						<div>
+							<!--item-->
+							<img src="../img/pictos/picto_DESKTOP1bis.png" alt="Pictogramme avion papier">
+							<h4>Formule<br><span>Trilogie</span>
+							</h4>
+							<p class="prix">
+								<b>
+									{{ tarifPremium[0].tarif }}
+								</b>€ TTC</p>
+							<div>
+								<p class="etape">
+									<b>Étape 1</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour1[0].villeEtape }},
+										{{ etapeJour1[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesPremiumJour1 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 2</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour2[0].villeEtape }},
+										{{ etapeJour2[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesPremiumJour2 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+							<div>
+								<p class="etape">
+									<b>Étape 3</b>
+								</p>
+								<p>
+									<b>
+										{{ etapeJour3[0].villeEtape }},
+										{{ etapeJour3[0].paysEtape }}
+									</b>
+								</p>
+								{% for activite in activitesPremiumJour3 %}
+									<p>{{ activite.titreActivite }}</p>
+								{% endfor %}
+							</div>
+						</div>
+
+						<button class="btn-choisir" id="choisir3">Découvrir</button>
+
+					</article>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--Section couchsurfer-->
+	<section class="couchsurfer">
+		<div class="container">
+			<h3>Couchsurfers</h3>
+			<div id="carousel">
+
+
+				<div class="prev">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/Anastas.png" alt="photo profil Anastas">
+						<h3>Anastas</h3>
+						<p>44 ans</p>
+						<h4>Madrid, Espagne</h4>
+						<p>Graphiste</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+						<a class="btn-profil" href="">Voir profil</a>
+					</article>
+				</div>
+
+				<div class="selected">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/paola.png" alt="photo profil paola">
+						<h3>Paola</h3>
+						<p>29 ans</p>
+						<h4>Madrid, Espagne</h4>
+						<p>Actrice, photographe</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+						<a class="btn-profil" href="">Voir profil</a>
+					</article>
+				</div>
+
+				<div class="next">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/Santos.png" alt="photo profil Santos">
+						<h3>Santos</h3>
+						<p>44 ans</p>
+						<h4>Madrid, Espagne</h4>
+						<p>Communication</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+						<a class="btn-profil" href="">Voir profil</a>
+					</article>
+				</div>
+
+
+			</div>
+
+		</div>
+	</section>
+
+	<!--SECTION RETOUR D'EXPERIENCES-->
+
+	<section class="experience">
+		<div class="container">
+			<h3 id="titre_experience">Retour d'expériences</h3>
+			<div id="carousel">
+
+
+				<div class="prev">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/patrick.png" alt="photo profil Patrick">
+						<h3>Patrick</h3>
+						<p>32 ans</p>
+						<h4>Sex & the city</h4>
+						<h5>New-York, U.S.A.</h5>
+						<p class="temoignage">
+							Super aventure ! Je suis partie à New-York<br>
+							au mois de Juillet dernier<br>
+							et j’ai eu une superbe expérience.
+						</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+					</article>
+				</div>
+
+				<div class="selected">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/cynthia.png" alt="photo profil cynthia">
+						<h3>Cynthia</h3>
+						<p>32 ans</p>
+						<h4>Sex & the city</h4>
+						<h5>New-York, U.S.A.</h5>
+						<p class="temoignage">
+							Super aventure ! Je suis partie à New-York<br>
+							au mois de Juillet dernier<br>
+							et j’ai eu une superbe expérience.
+						</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+					</article>
+				</div>
+
+				<div class="next">
+					<article class="flex_couchsurfeur">
+						<img class="profil" src="../img/photos/Mathiu.png" alt="photo profil Mathiu">
+						<h3>Mathiu</h3>
+						<p>35 ans</p>
+						<h4>Sex & the city</h4>
+						<h5>New-York, U.S.A.</h5>
+						<p class="temoignage">
+							Super aventure ! Je suis partie à New-York<br>
+							au mois de Juillet dernier<br>
+							et j’ai eu une superbe expérience.
+						</p>
+						<img class="etoiles" src="../img/pictos/Picto22_DESKTOP.png" alt="avis étoiles">
+					</article>
+				</div>
+
+
+			</div>
+
+		</div>
+	</section>
+
+
+	<section id="suggestions">
+		<div class="container">
+			<h2>Vous aimerez aussi ...</h2>
+			<div
+				id="flex-card">
+				<!--conteneur flex-->
+				<article class="flex-article">
+					<img class="picto" src="../img/pictos/policier.png" alt="Pictogramme genre policier">
+					<img class="img_film" src="../img/photos/bonnieClyde_final.png" alt="Image du film Bonnie and Clyde">
+					<div class="infos_card">
+						<h5>
+							<b>Bonnie and Clyde, Texas, U.S.A.</b>
+						</h5>
+						<p class="description_card">Partez sur les traces du gang Barrow en Amérique centrale et suivez les traces de ce couple
+																																																								                            culte au travers d'étapes surprenantes.</p>
+						<p class="prix_card">À partir de 450 € TTC</p>
+						
+					</div>
+				</article>
+
+				<article class="flex-article">
+					<img class="picto" src="../img/pictos/superheros.png" alt="Pictogramme super héros">
+					<img class="img_film" src="../img/photos/spiderman_final.png" alt="Image du film Spiderman">
+					<div class="infos_card">
+						<h5>
+							<b>Spider Man, New-York, U.S.A.</b>
+						</h5>
+						<p class="description_card">Glissez vous dans la peau du célèbre homme-araignée. Découvrez ou redécouvrez les incroyables
+																																																								                            films Spider-man inspirés.</p>
+						<p class="prix_card">À partir de 600 € TTC</p>
+					</div>
+				</article>
+
+				<article class="flex-article">
+					<img class="picto" src="../img/pictos/romance.png" alt="Pictogramme coeur">
+					<img class="img_film" src="../img/photos/sexandthecity_final.png" alt="Image de la série Sex and the City">
+					<div class="infos_card">
+						<h5>
+							<b>Sex and The City, New-York, U.S.A.</b>
+						</h5>
+						<p class="description_card">Visite de la ville avec un guide qui vous ménera dans les coulisses de la série et vous
+																																																								                            plongera dans un Manathan so chic so sex ...</p>
+						<p class="prix_card">À partir de 600 € TTC</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+{% endblock %}

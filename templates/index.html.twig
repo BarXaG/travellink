@@ -1,0 +1,314 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Home Page
+{% endblock %}
+
+{% block content %}
+
+	<section id="slider-homepage">
+		<div class="titre">
+			<h1>Passion cinéma</h1>
+			<h2>Votre univers mérite<br><span class="retour-ligne-slider">d'être partagé</span>
+			</h2>
+		</div>
+	</section>
+
+	<section id="concept">
+		<div class="container">
+			<h3>Notre concept</h3>
+			<div class="row">
+				<article class="col-sm-4">
+					<div class="row">
+						<div class="col-sm-4"><img class="img-fluid" src="img/pictos/Picto1_DESKTOP_New.png" alt="logo"></div>
+						<div class="col-sm-8">
+							<h4>Découvrez</h4>
+							<p>Vous adorez voyager et êtes fan de cinéma ? Découvrez une nouvelle façon de voyager qui réunit vos deux activités préférées !
+							</p>
+						</div>
+					</div>
+				</article>
+				<article class="col-sm-4">
+					<div class="row">
+						<div class="col-sm-4"><img class="img-fluid" src="img/pictos/Picto48_DESKTOP_New.png" alt="canapé"></div>
+						<div class="col-sm-8">
+							<h4>Rencontrez</h4>
+							<p>Vivez votre passion du cinéma avec notre communauté de Couchsurfers cinéphiles tout autour du monde !</p>
+						</div>
+					</div>
+				</article>
+				<article class="col-sm-4">
+					<div class="row">
+						<div class="col-sm-4"><img class="img-fluid" src="img/pictos/Picto2_DESKTOP.png" alt="paiement partagé"></div>
+						<div class="col-sm-8">
+							<h4>Partagez</h4>
+							<p>Vous partez à plusieurs ? Nous avons créé pour vous le moyen de paiement déal pour vos moments partagés.</p>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="principale">
+
+		<section id="catalogue">
+			<div class="container">
+				<h3>Nos voyages</h3>
+				<div class="row">
+					<div class="col-sm-3 zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[10] %}{{ asset('img/pictos/Picto55_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[10] %}{{ asset('img/imgExperience/harrypotter.png') }}{% endif %}" alt="Harry Potter">
+						<div class="description ombrage">
+							<h4>{{lastArticles[10].theme}}<br>{{lastArticles[10].villeDestination}},
+								{{lastArticles[10].paysDestination}}</h4>
+							<p>{{lastArticles[10].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[10].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 700 €</p>
+						</div>
+					</div>
+
+					<div id="map" class="col-sm-6 ombrage">
+						<button class="grand" href="#">Voir tous les voyages</button>
+						<img src="img/pictos/Picto9_DESKTOP.png" alt="plus">
+						<img src="img/pictos/Picto10_DESKTOP.png" alt="moins">
+					</div>
+
+					<div class="col-sm-3 zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[7] %}{{ asset('img/pictos/Picto58_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[7] %}{{ asset('img/imgExperience/spiderman.png') }}{% endif %}" alt="Spiderman">
+						<div class="description ombrage">
+							<h4>{{lastArticles[7].theme}}<br>{{lastArticles[7].villeDestination}},
+								{{lastArticles[7].paysDestination}}</h4>
+							<p>{{lastArticles[7].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[7].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 650 €</p>
+						</div>
+					</div>
+				</div>
+
+					<div class="row">
+          <div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[8] %}{{ asset('img/pictos/Picto55_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[8] %}{{ asset('img/imgExperience/ghibli.png') }}{% endif %}" alt="Ghibli">
+						<div class="description ombrage">
+							<h4>{{lastArticles[8].theme}}<br>{{lastArticles[8].villeDestination}},
+								{{lastArticles[8].paysDestination}}</h4>
+							<p>{{lastArticles[8].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[8].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 2000 €</p>
+						</div>
+					</div>
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[6] %}{{ asset('img/pictos/Picto59_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[6] %}{{ asset('img/imgExperience/Sexandthecity.png') }}{% endif %}" alt="Sex and the city">
+						<div class="description ombrage">
+							<h4>{{lastArticles[6].theme}}<br>{{lastArticles[6].villeDestination}},
+								{{lastArticles[6].paysDestination}}</h4>
+							<p>{{lastArticles[6].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[6].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 1500 €</p>
+						</div>
+					</div>
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[5] %}{{ asset('img/pictos/Picto60_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[5] %}{{ asset('img/imgExperience/starwars.png') }}{% endif %}" alt="Star Wars">
+						<div class="description ombrage">
+							<h4>{{lastArticles[5].theme}}<br>{{lastArticles[5].villeDestination}},
+								{{lastArticles[5].paysDestination}}</h4>
+							<p>{{lastArticles[5].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[5].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 550 €</p>
+						</div>
+					</div>
+        </div>
+				
+        <div class="row">
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[3] %}{{ asset('img/pictos/Picto58_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[3] %}{{ asset('img/imgExperience/Piratedescaraibes.png') }}{% endif %}" alt="Pirates des Caraïbes">
+						<div class="description ombrage">
+							<h4>{{lastArticles[3].theme}}<br>{{lastArticles[3].villeDestination}},
+								{{lastArticles[3].paysDestination}}</h4>
+							<p>{{lastArticles[3].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[3].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 1500 €</p>
+						</div>
+					</div>
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[2] %}{{ asset('img/pictos/Picto53_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[2] %}{{ asset('img/imgExperience/blairwitch.png') }}{% endif %}" alt="Projet Blair Witch">
+						<div class="description ombrage">
+							<h4>{{lastArticles[2].theme}}<br>{{lastArticles[2].villeDestination}},
+								{{lastArticles[2].paysDestination}}</h4>
+							<p>{{lastArticles[2].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[2].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 1500 €</p>
+						</div>
+					</div>
+
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[9] %}{{ asset('img/pictos/Picto57_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[9] %}{{ asset('img/imgExperience/alfredhitchcock.png') }}{% endif %}" alt="Hitchcock">
+						<div class="description ombrage">
+							<h4>{{lastArticles[9].theme}}<br>{{lastArticles[9].villeDestination}},
+								{{lastArticles[9].paysDestination}}</h4>
+							<p>{{lastArticles[9].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[9].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 650 €</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[0] %}{{ asset('img/pictos/Picto55_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[0] %}{{ asset('img/imgExperience/leseigneurdesanneaux.png') }}{% endif %}" alt="Seigneur des anneaux">
+						<div class="description ombrage">
+							<h4>{{lastArticles[0].theme}}<br>{{lastArticles[0].villeDestination}},
+								{{lastArticles[0].paysDestination}}</h4>
+							<p>{{lastArticles[0].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[0].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 4500 €</p>
+						</div>
+					</div>
+
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[4] %}{{ asset('img/pictos/Picto56_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[4] %}{{ asset('img/imgExperience/almodovar.png') }}{% endif %}" alt="Almodovar">
+						<div class="description ombrage">
+							<h4>{{lastArticles[4].theme}}<br>{{lastArticles[4].villeDestination}},
+								{{lastArticles[4].paysDestination}}</h4>
+							<p>{{lastArticles[4].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[4].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 1400 €</p>
+						</div>
+					</div>
+
+
+					<div class="col-sm-3 mx-auto zcard d-flex">
+						<img class="img-fluid zgenre" src="{% if lastArticles[1] %}{{ asset('img/pictos/Picto54_DESKTOP.png') }}{% endif %}" class="card-img-top" alt="">
+						<img class="cardimage" src="{% if lastArticles[1] %}{{ asset('img/imgExperience/aubergeespagnole.png') }}{% endif %}" alt="Hitchcock">
+						<div class="description ombrage">
+							<h4>{{lastArticles[1].theme}}<br>{{lastArticles[1].villeDestination}},
+								{{lastArticles[1].paysDestination}}</h4>
+							<p>{{lastArticles[1].descriptionExperience | slice(0,50)}}...
+								<a href="https://127.0.0.1:8000/experience/{{lastArticles[1].id}}">[Suite]</a>
+							</p>
+							<p class="prix-accueil">À partir de 650 €</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="travellinketvous">
+			<div class="container">
+				<h3>Travellink & vous</h3>
+				<div class="row alignement">
+					<div class="col-sm-4">
+						<img class="img-fluid" src="img/photos/Photo Blog.jpg " alt="compagnon">
+						<div class="row">
+							<div class="col-sm-6 offset-3">
+								<img class="img-fluid picto" src="img/pictos/Picto19_DESKTOP.png" class="card-img-top" alt="compagnon">
+							</div>
+							<div class="col-sm-3"></div>
+						</div>
+						<div class="bloc-texte">
+							<h4>Compagnon de voyage</h4>
+							<p>Cherchez et trouvez votre compagnon de voyage idéal pour partager votre expérience cinéphile.
+							</p>
+							<a href="#">
+								<img class="img-fluid" src="img/pictos/Picto11_DESKTOP.png" alt="voir plus">
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="bloc-texte-2">
+							<h4>Compagnon de voyage</h4>
+							<p>Cherchez et trouvez votre compagnon de voyage idéal pour partager votre expérience cinéphile.
+							</p>
+							<a href="#">
+								<img class="img-fluid" src="img/pictos/Picto11_DESKTOP.png" alt="voir plus">
+							</a>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 offset-3">
+								<img class="img-fluid picto-2" src="img/pictos/Component 1.png" class="card-img-top" alt="compagnon">
+							</div>
+							<div class="col-sm-3"></div>
+						</div>
+						<img class="img-fluid" src="img/photos/Photo Blog.jpg " alt="compagnon">
+					</div>
+					<div class="col-sm-4">
+						<img class="img-fluid" src="img/photos/Photo Blog(2).jpg" alt="carnets">
+						<div class="row">
+							<div class="col-sm-6 offset-3">
+								<img class="img-fluid picto" src="img/pictos/Picto20_DESKTOP.png" class="card-img-top" alt="compagnon">
+							</div>
+							<div class="col-sm-3"></div>
+						</div>
+						<div class="bloc-texte">
+							<h4>Carnets de voyage</h4>
+							<p>Grâce à notre communauté de Linkers, trouvez l’inspiration pour vos futurs voyages et bien plus encore.
+							</p>
+							<a href="#">
+								<img class="img-fluid" src="img/pictos/Picto11_DESKTOP.png" alt="voir plus">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div>
+					<a href="index.html" class="d-flex justify-content-end align-items-end mt-3">
+						<img class="img-fluid" src="img/pictos/Picto21_DESKTOP.png" alt="retour en haut">
+					</a>
+					<p class="d-flex justify-content-end align-items-end mt-3">Retour en haut</p>
+				</div>
+
+				<div>
+					<a href="contact.html" class="d-flex justify-content-end align-items-end mt-3">
+						<img class="img-fluid" src="img/pictos/Picto7_DESKTOP.png" alt="aide">
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<div class="container">
+				<h3>Nous sommes à votre écoute</h3>
+				<div class="row">
+					<article class="col-sm-3">
+						<img class="img-fluid" src="img/pictos/Picto3_DESKTOP.png" alt="whatsapp">
+						<h5>Whatsapp</h5>
+					</article>
+					<article class="col-sm-3">
+						<img class="img-fluid" src="img/pictos/Picto4_DESKTOP.png" alt="formulaire">
+						<h5>Formulaire</h5>
+					</article>
+					<article class="col-sm-3">
+						<img class="img-fluid" src="img/pictos/Picto5_DESKTOP.png" alt="téléphone">
+						<h5>Téléphone</h5>
+					</article>
+					<article class="col-sm-3">
+						<img class="img-fluid" src="img/pictos/Picto6_DESKTOP.png" alt="chat">
+						<h5>Chat</h5>
+					</article>
+				</div>
+			</div>
+		</section>
+
+
+	{% endblock %}

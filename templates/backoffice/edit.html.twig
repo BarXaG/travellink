@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <h1>Modifier les infos de l'experience</h1>
+    {# {{ form(form, {attr:{novalidate: 'novalidate' }}) }} #}
+    {{ include('backoffice/editImagesExp.html.twig') }}
+
+    <a href="{{ path('backoffice_showall') }}">
+    <i class="fas fa-arrow-left fa-4x"></i></a>
+
+    {{ include('backoffice/deleteImagesExp.html.twig') }}
+
+</div>
+{% endblock %}

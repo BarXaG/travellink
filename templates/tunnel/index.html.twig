@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}
+				Travellink
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+					and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{# 'app' must match the first argument to addEntry() in webpack.config.js #}
+			
+			<!-- CSS Bootstrap 4.6.0 -->
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+			<link
+			rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+			<!-- Google Fonts -->
+			<link rel="preconnect" href="https://fonts.gstatic.com">
+			<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+			<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+			<!-- Font Awesome 5.15.2 -->
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			<!-- Bootstrap Bundle 5.0.0 with Popper -->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+			<!--<script>
+			        var searchIcone = document.getElementById("search-icone");
+			        var search = document.getElementById("search");
+			        searchIcone.addEventListener("click", function () {
+			            search.toggleAttribute('hidden');
+			        })
+			      </script>-->
+		<!-- Custom file input -->
+			<!--<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+			      <script>
+							$(document).ready(function () {
+			          bsCustomFileInput.init()
+			        })
+			
+			
+						</script>-->
+		{% endblock %}
+	</head>
+
+	<body>
+		{% block body %}
+
+			<header>
+				<div class="container">
+					<div class="center">
+						<a href="{{ path('index') }}"><img src="{{ asset("img/logo/Logo_Creme.png") }}" alt="logo" class="logo"></a>
+					</div>
+
+					<div class="flex-nav">
+						<nav class="navbar navbar-expand-lg navbar-light nav-basis">
+							<div
+								class="container-fluid">
+								<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+								<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse" id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-10 mb-lg-0 between">
+										<li class="nav-item">
+											<a class="nav-link active" href="{{path('travellink_catalogue')}}">Catalogue</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active" href="#">Blog</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active" href="{{ path('contact') }}">Contact</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active" href="#">Panier</a>
+										</li>
+									</ul>
+								</div>
+
+
+								<div class="profile">
+									<ul class="navbar-nav">
+										<li class="nav-item dropdown">
+											<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<img class="img-fluid" src="{{asset('img/pictos/Picto52_DESKTOP.png')}}" width="40" height="40" class="rounded-circle">
+											</a>
+											{% if is_granted('ROLE_ADMIN') %}
+
+												<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+													<span class="dropdown-item-text">Dropdown item text</span>
+													<a class="dropdown-item" href="{{ path('index') }}">Dashboard</a>
+													<a class="dropdown-item" href="{{ path('backoffice_showall') }}">Backoffice</a>
+													<a class="dropdown-item" href="{{ path('index') }}">Edit Profile</a>
+													<a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
+												</div>
+											{% else %}
+												<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+													<a class="dropdown-item" href="{{ path('app_register') }}">Creer un compte</a>
+													<a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
+
+												{% endif %}
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</header>
+
+				{% block content %}
+
+					<body>
+						<main
+							id="tunnelachat">
+
+							<!-- FIL D ARIANE -->
+							<nav aria-label="fil d'ariane">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="{{ path('index') }}">
+											<img src="{{asset('img/pictos/Picto14_DESKTOP.png')}}" alt="accueil"></a>
+									</li>
+									<li class="breadcrumb-item">
+										<a href="{{ path('travellink_catalogue') }}">Catalogue</a>
+									</li>
+									<li class="breadcrumb-item">
+										<a href="#">Fiche produit</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">Panier</li>
+								</ol>
+							</nav>
+
+							<!-- ENTETE RECAPITULATIF DU VOYAGE -->
+							<section>
+								<div class="container">
+									<div class="row">
+										<div class="col">
+											<h1 id="hvoyage">Récapitulatif
+												<br><span>du voyage</span>
+											</h1>
+											<div class="row">
+												<div class="col-lg-5 col-sm-12">
+													<img class="img-fluid vignette" id="produit_vertical" src="{{asset('img/photos/panorama-mer.jpg')}}" alt="recapitulatif-voyage">
+												</div>
+												<div class="col-lg-7 col-sm-12">
+													<div class="row">
+														<div class="col-10">
+															<h2>Sur les traces d'Almodóvar</h2>
+														</div>
+														<div class="col-2 text-right">
+															<a href="#"><img class="img-fluid" src="{{asset('img/pictos/Group_145.png')}}" alt="éditer"></a>
+														</div>
+													</div>
+
+													<ul
+														id="caracteristiques">
+														<!--caractéristique bloc 1-->
+														<li><img class="img-fluid" src="{{asset('img/pictos/Picto39_DESKTOP.png')}}" alt="picto bande de film">Cinéma
+															                                        d'auteur</li>
+														<li><img class="img-fluid" src="{{asset('img/pictos/Picto43_DESKTOP.png')}}" alt="picto localisation">Madrid,
+															                                        Espagne</li>
+														<li><img class="img-fluid" src="{{asset('img/pictos/Picto42_DESKTOP.png')}}" alt="picto valise">Du 13 mai au 22 mai
+															                                        2021</li>
+														<li><img class="img-fluid" src="{{asset('img/pictos/Picto41_DESKTOP.png')}}" alt="picto valise">
+															4 Participants</li>
+													</ul>
+
+													<div id="recap-datas">
+														<p id="prix">
+															<b>750 €</b>
+															TTC</p>
+														<p class="infos">Formule Long métrage</p>
+
+														<div class="row">
+															<div class="col-8">
+																<p>Avez-vous un code de réduction ?</p>
+															</div>
+															<div class="col-4">
+																<input type="promo" class="form-control" id="reduction" placeholder="Votre code de réduction">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</section>
+
+
+							<div class="accordion" id="accordionExample">
+								<div class="container">
+									<div class="card">
+										<div class="card-header" id="headingOne">
+											<h2 class="mb-0">
+												<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													<img class="pastille img-fluid" src="{{asset('img/pictos/Picto15_DESKTOP.png')}}" alt="etape1">
+													Choix du paiement
+												</button>
+											</h2>
+										</div>
+
+
+										<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+											<div class="card-body">
+												<section id="tunnel-achat-1">
+													<div class="choix-paiement row justify-content-around">
+														<div class="col-lg-3 col-md-5 col-sm-6">
+															<div class="card">
+																<div class="card-body">
+																	<div class="radio-green">
+																		<input type='radio' name='choix-paiement' value='cb' id="choix-paiement"/><label for="choix-paiement"></label>
+																	</div>
+																	<h3>Paiement seul</h3>
+																</div>
+															</div>
+														</div>
+														<div class="col-lg-3 col-md-5 col-sm-6">
+															<div class="card">
+																<div class="card-body">
+																	<div class="radio-green">
+																		<input type='radio' name='choix-paiement' value='choix-paiement' id="choix-paiement"/><label for="choix-paiement"></label>
+																	</div>
+																	<h3>Paiement partagé</h3>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row justify-content-around">
+													<div class="col-3 btn-tunnel-achat">
+														
+														<p>1/3 à compléter</p>
+													</div>
+													<div class="col-lg-3 col-md-5 col-sm-5 btn-tunnel-achat">
+														<button class="btn btn-block center">Suivant&nbsp;<img class="img-fluid" src="{{asset('img/pictos/VectorS.jpg')}}" alt="fleche-suivant"></button>
+													</div>
+												</div>
+
+											</section>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="card">
+								<div class="container">
+									<div class="card-header" id="headingTwo">
+										<h2 class="mb-0">
+											<button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><img class="pastille img-fluid" src="{{asset('img/pictos/Picto16_DESKTOP.png')}}" alt="etape2">
+												Sélection du groupe</button>
+										</h2>
+									</div>
+									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+										<div class="card-body">
+											<section id="tunnel-achat-2" class="d-sm-none d-md-block">
+												<div class=" select-group row">
+													<div class="col-4">
+														<div class="card">
+															<img src="{{asset('img/photos/Rectangle 87(2).jpg')}}" class="card-img-top" alt="destination-texas">
+															<div class="card-body">
+																<ul class="row pl-0">
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																	</li>
+																</ul>
+																<h4 class="card-text">Sur les traces de Bonnie & Clyde</h4>
+																<p>Du 13/05/21 au 22/05/21</p>
+																<p>Texas, U.S.A.
+																</p>
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-4">
+														<div class="card">
+															<img src="{{asset('img/photos/Rectangle 87.jpg')}}" class="card-img-top" alt="destination-madrid">
+															<div class="card-body">
+
+																<ul class="row pl-0">
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																	</li>
+																</ul>
+
+																<h4 class="card-text">Sur les traces d'Almodóvar</h4>
+																<p>Du 24/05/21 au 05/06/21</p>
+																<p>Madrid, Espagne
+																</p>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-4">
+														<div class="card">
+															<img src="{{asset('img/photos/Rectangle 87(1).jpg')}}" class="card-img-top" alt="destination-new-zealand">
+															<div class="card-body">
+
+																<ul class="row pl-0">
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																	</li>
+																	<li class="col-3">
+																		<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																	</li>
+																</ul>
+
+																<h4 class="card-text">Rendez-vous en Terre du Milieu</h4>
+																<p>Du 01/08/21 au 31/08/21</p>
+																<p>Nouvelle-Zélande</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
+
+												<div class="row">
+													<div class="col-4">
+														<button class="btn btn-block retour"><img class="img-fluid" src="{{asset('img/pictos/VectorP.jpg')}}" alt="fleche-precedent">
+															Précédent</button>
+													</div>
+													<div class="col-4 img-force-fluid">
+														<button class="btn btn-block creategroup" id="creation-gpe"><img class="img-fluid creer-groupe creategroupplus" src="{{asset('img/pictos/Picto9_DESKTOP.png')}}" alt="creer-groupe">
+															Créer un groupe</button>
+													</div>
+													<div class="col-4 ">
+														<button class="btn btn-block retour">Suivant&nbsp;<img class="img-fluid" src="{{asset('img/pictos/VectorS.jpg')}}" alt="fleche-suivant"></button>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-4">
+														<p>2/3 complété</p>
+													</div>
+												</div>
+											</section>
+
+											<section>
+												<div id="carouselExampleIndicators" class="carousel slide d-none d-sm-block d-md-none" data-ride="carousel">
+													<ol class="carousel-indicators">
+														<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+														<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+														<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+													</ol>
+													<div class="carousel-inner">
+														<div class="carousel-item active">
+															<div class="card">
+																<img src="{{asset('img/photos/Rectangle 87(2).jpg')}}" class="card-img-top" alt="destination-texas">
+																<div class="card-body">
+																	<div class="pastilles">
+																		<ul class="row">
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																			</li>
+																		</ul>
+																	</div>
+																	<h4 class="card-text">Sur les traces de Bonnie & Clyde</h4>
+																	<p>Du 13/05/21 au 22/05/21</p>
+																	<p>Texas, U.S.A.
+																	</p>
+																</div>
+															</div>
+														</div>
+														<div class="carousel-item">
+															<div class="card">
+																<img src="{{asset('img/photos/Rectangle 87.jpg')}}" class="card-img-top" alt="destination-madrid">
+																<div class="card-body">
+																	<div class="pastilles">
+																		<ul class="row">
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																			</li>
+																		</ul>
+																	</div>
+																	<h4 class="card-text">Sur les traces d'Almodóvar</h4>
+																	<p>Du 24/05/21 au 05/06/21</p>
+																	<p>Madrid, Espagne
+																	</p>
+																</div>
+															</div>
+														</div>
+														<div class="carousel-item">
+															<div class="card">
+																<img src="{{asset('img/photos/Rectangle 87(1).jpg')}}" class="card-img-top" alt="destination-new-zealand">
+																<div class="card-body">
+																	<div class="pastilles">
+																		<ul class="row">
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto32_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto33_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto34_Groupe_DESKTOP.png')}}">
+																			</li>
+																			<li class="col-3">
+																				<img class="img-fluid" src="{{asset('img/pictos/Picto35_Groupe_DESKTOP.png')}}">
+																			</li>
+																		</ul>
+																	</div>
+																	<h4 class="card-text">Rendez-vous en Terre du Milieu</h4>
+																	<p>Du 01/08/21 au 31/08/21</p>
+																	<p>Nouvelle-Zélande</p>
+																</div>
+															</div>
+														</div>
+													</div>
+													<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+														<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+														<span class="sr-only">Précédent</span>
+													</a>
+													<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+														<span class="carousel-control-next-icon" aria-hidden="true"></span>
+														<span class="sr-only">Suivant</span>
+													</a>
+												</div>
+											</section>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="headingThree">
+											<h2 class="mb-0">
+												<button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><img class="pastille img-fluid" src="{{asset('img/pictos/Exclude(2).jpg')}}" alt="etape3">
+													Paiement
+												</button>
+											</h2>
+										</div>
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+											<div class="card-body">
+												<section id="tunnel-achat-3">
+													<div class="paiement row justify-content-around">
+														<div class="col-lg-3 col-md-5 col-sm-6">
+															<div class="card">
+																<div class="card-body">
+																	<div class="radio-green">
+																		<input type='radio' name='paiement' value='cb' id="paiement-cb"/><label for="paiement-cb"></label>
+																	</div>
+																	<h3>CB</h3>
+																</div>
+															</div>
+														</div>
+														<div class="col-lg-3 col-md-5 col-sm-6">
+															<div class="card">
+																<div class="card-body">
+																	<div class="radio-green">
+																		<input type='radio' name='paiement' value='paypal' id="paiement-paypal"/><label for="paiement-paypal"></label>
+																	</div>
+																	<h3>Paypal</h3>
+																</div>
+															</div>
+														</div>
+													</div>
+
+
+													<div class="row justify-content-around">
+														<div class="col-lg-3 col-md-5 col-sm-6 btn-tunnel-achat">
+															<button class="btn btn-block"><img class="img-fluid" src="{{asset('img/pictos/VectorP.jpg')}}" alt="fleche-precedent">
+																Précédent</button>
+														</div>
+
+														<div class="col-lg-3 col-md-5 col-sm-6 btn-tunnel-achat">
+															<button class="btn btn-block">Suivant&nbsp;<img class="img-fluid" src="{{asset('img/pictos/VectorS.jpg')}}" alt="fleche-suivant"></button>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-4">
+															<p>3/3 complété</p>
+														</div>
+													</div>
+
+												</section>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container">
+									<div class="accordion" id="accordionExample">
+										<div class="card">
+											<div class="card-header" id="headingOne">
+												<h2 class="mb-0">
+													<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><img class="pastille img-fluid" src="{{asset('img/pictos/Exclude(3).jpg')}}" alt="etape4">
+														Coordonnées bancaires
+													</button>
+												</h2>
+											</div>
+
+											<div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#accordionExample">
+												<div class="card-body">
+													<section id="tunnel-achat-4">
+														<div class="row align-items-center">
+															<div id="coordonnees_bancaires">
+																<div id="champ1">
+																	<h4 class="cb">Titulaire de la carte :</h4>
+																	<input type="nom-prenom" class="champ" name="nom-prenom" id="nom-prenom" placeholder="Nom Prénom" required>
+																</div>
+																<div id="champ2">
+																	<h4 class="cb">Numéro de carte bancaire :</h4>
+																	<input type="bankid" class="champ" name="bankid" id="bankid" placeholder="XXXX XXXX XXXX XXXX XX/XX XXX" required>
+																</div>
+																<div>
+																	<input type="checkbox" id="checkbox" name="checkbox" required>
+																	<label for="checkbox" id="cgv">En cochant cette case, j'accepte les CGV</label>
+																</div>
+																<div>
+																	<button class="valider text-center">Valider paiement</button>
+																</div>
+															</div>
+														</section>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- SECTION AIDE -->
+										<section id="aide">
+											<div class="container">
+												<div class="row">
+													<div id="aide2" class="col-md-6 offset-md-3">
+														<h5>Besoin d'aide ?</h5>
+														<h6>Nous sommes à votre écoute via</h6>
+														<div class="row text-center">
+															<div class="col-6">
+																<p><img src="{{asset('img/pictos/Picto26_DESKTOP.png')}}" alt="whatsapp">
+																	Whatsapp</p>
+															</div>
+															<div class="col-6">
+																<p><img src="{{asset('img/pictos/Picto27_DESKTOP.png')}}" alt="telephone">
+																	Téléphone</p>
+															</div>
+															<div class="col-6">
+																<p><img src="{{asset('img/pictos/Picto28_DESKTOP.png')}}" alt="formulaire">
+																	Formulaire</p>
+															</div>
+															<div class="col-6">
+																<p><img src="{{asset('img/pictos/Picto29_DESKTOP.png')}}" alt="chat">
+																	Chat</p>
+															</div>
+														</div>
+														<p>Du lundi au vendredi
+															<br>
+															9h-17h</p>
+														<p>Samedi et dimanche
+															<br>
+															9h-12h</p>
+													</div>
+												</div>
+											</div>
+										</section>
+
+
+									</main>
+
+
+								{% endblock %}
+
+								<footer id="footer">
+									<div class="container footer-ordi">
+										<div div class="footer1">
+											<h5 class="footer1-2">On reste en contact ?</h5>
+											<form action="" class=" d-flex justify-content-center align-items-center ">
+												<input type="text" placeholder="Email" class="form-footer">
+												<a href="#"><img src="{{asset('img/pictos/Picto12_DESKTOP.png')}}" alt="Rechercher" class="form-footer2"></a>
+											</form>
+										</div>
+										<div class="row footer2">
+											<aside class=" col-lg-4 footer2-1">
+												<h6 class="footer2-1-1">Où nous trouver ?</h6>
+												<h6 class="footer2-1-2">Travellink</h6>
+												<p id="adresse">36 quai des orfèvres<br>75001 Paris</p>
+												<p>Tél. : 01.00.00.00.00</p>
+											</aside>
+											<div class="vert"></div>
+											<aside class=" col-lg-4 footer2-2">
+												<h6>Informations légales</h6>
+												<p>Mentions légales</p>
+												<p>Conditions générales de vente</p>
+												<p>Conseils aux voyageurs</p>
+											</aside>
+											<div class="vert"></div>
+											<aside class=" col-lg-3 footer2-3">
+												<h6>Contact</h6>
+												<p>Suivez-nous</p>
+												<ul class="d-flex">
+													<li>
+														<a href="#"><img src="{{asset('img/pictos/Picto49_DESKTOP.png')}}" alt="facebook"></a>
+													</li>
+													<li class="mx-4">
+														<a href="#"><img src="{{asset('img/pictos/Picto23_DESKTOP.png')}}" alt="twitter"></a>
+													</li>
+													<li>
+														<a href="#"><img src="{{asset('img/pictos/Picto24_DESKTOP.png')}}" alt="instagram"></a>
+													</li>
+												</ul>
+											</aside>
+										</div>
+									</div>
+									
+									<div class="footer row flex-column justify-content-center align-items-center mt-4 bas-footer">
+										<p class="bottom10px">2021 © Travellink - by BG-Success</p>
+									</div>
+								</footer>
+
+							{% endblock %}
+						</body>
+					</html>
