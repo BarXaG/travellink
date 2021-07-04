@@ -1,0 +1,94 @@
+#-----------------------------------------------------
+#----------------------- HOME ------------------------
+#-----------------------------------------------------
+index:
+    path: /
+    controller: App\Controller\HomeController::showLastArticles
+
+#-----------------------------------------------------
+#-------------------- EXPERIENCE ---------------------
+#-----------------------------------------------------
+travellink_catalogue:
+  path: /catalogue
+  controller: App\Controller\ExperienceController::showAll
+
+
+travellink_experience_show:
+  path: /experience/{id}
+  controller: App\Controller\ExperienceController::show
+  requirements:
+    id: \d+
+
+#-----------------------------------------------------
+#----------------------- USER ------------------------
+#-----------------------------------------------------
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+app_logout:
+    path: /logout
+
+backoffice_showall:
+    path: /admin
+    controller: App\Controller\BackOfficeController::showAll
+
+backoffice_showallapi:
+    path: /backoffice/api
+    controller: App\Controller\BackOfficeController::showAllApi
+
+backoffice_create:
+    path: /backoffice/create
+    controller: App\Controller\BackOfficeController::create
+
+backoffice_delete:
+    path: /backoffice/delete/{id}
+    controller: App\Controller\BackOfficeController::delete
+    requirements:
+      id: \d+
+
+backoffice_image_delete:
+    path: /backoffice/supprimer/{id}
+    controller: App\Controller\BackOfficeController::deleteImage
+    requirements:
+      id: \d+
+
+backoffice_edit:
+    path: /backoffice/edit/{id}
+    controller: App\Controller\BackOfficeController::edit
+    requirements:
+      id: \d+
+
+user_show: 
+   path: /utilisateur/bh/{id} 
+   controller: App\Controller\ProfilUtilisateurController::show
+   # dans le controller sur le public function index
+   requirements: 
+      id: \d+ # qui indique que le paramètre doit être un entier, de 1 ou plusieurs chiffres.
+
+user_edit:
+    path: /utilisateur/{id}
+    controller: App\Controller\ProfilUtilisateurController::edit
+    requirements:
+      id: \d+
+
+#-----------------------------------------------------
+#-------------------- CONTACT ------------------------
+#-----------------------------------------------------
+
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::index
+
+
+#-----------------------------------------------------
+#--------------- TUNNEL D'ACHAT ----------------------
+#-----------------------------------------------------
+
+tunnel:
+    path: /tunnel
+    controller: App\Controller\TunnelController:index
